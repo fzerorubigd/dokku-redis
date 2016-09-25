@@ -13,7 +13,7 @@ redis-clone-cmd() {
   [[ -z "$NEW_SERVICE" ]] && dokku_log_fail "Please specify a name for the new service"
 
   verify_service_name "$SERVICE"
-  service_create "$NEW_SERVICE"
+  service_create "$NEW_SERVICE" "${@:3}"
   dokku_log_info1 "Copying data from $SERVICE to $NEW_SERVICE"
   service_export "$SERVICE" | service_import "$NEW_SERVICE" > /dev/null 2>&1 || true
   dokku_log_info1 "Done"
